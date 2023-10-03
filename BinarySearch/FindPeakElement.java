@@ -13,8 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FindPeakElement {
-    public int solve(ArrayList<Integer> A) {
-        int n = A.size();
+    public int findPeakElement(int[] nums) {
+        int n = nums.length;
         // we will solve this using binary search
         int left = 1;
         int right = n-2;
@@ -22,25 +22,25 @@ public class FindPeakElement {
         //edge cases
         //size is 1
         if(n==1){
-            return A.get(0);
+            return nums[0];
         }
         //first element is peak
-        if(A.get(0)>A.get(1)){
-            return A.get(0);
+        if(nums[0]>nums[1]){
+            return nums[0];
         }
         //last element is peak
-        if(A.get(n-1)>A.get(n-2)){
-            return A.get(n-1);
+        if(nums[n-1]>nums[n-2]){
+            return nums[n-1];
         }
         //other cases
         while(left<=right){
             mid= (left+right)/2;
             //mid is peak
-            if(A.get(mid)>=A.get(mid-1) && A.get(mid)>=A.get(mid+1)){
-                return A.get(mid);
+            if(nums[mid]>=nums[mid-1] && nums[mid]>=nums[mid+1]){
+                return nums[mid];
             }
             //if peak is at right, search in right
-            else if(A.get(mid+1)>A.get(mid)){
+            else if(nums[mid+1]>nums[mid]){
                 left=mid+1;
             }
             //if peak is at left, search in left
@@ -48,12 +48,13 @@ public class FindPeakElement {
                 right= mid-1;
             }
         }
-        return 0;
+        return nums[mid];
     }
     public static void main(String[] args) {
         List<Integer> li = Arrays.asList(5, 17, 100, 11);
         ArrayList<Integer> A = new ArrayList<>(li);
         FindPeakElement fpe = new FindPeakElement();
-        System.out.println(fpe.solve(A));
+        int[] AA = {1,2,3,1};
+        System.out.println(fpe.findPeakElement(AA));
     }
 }
